@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1521311624 source:d:\facooltate\programare\poo\mergeproto\main.cpp
+	<iostream>
+	<fstream>
+	"VECTOR.h"
+
+1521311384 d:\facooltate\programare\poo\mergeproto\vector.h
+	<iostream>
+	<fstream>
+
