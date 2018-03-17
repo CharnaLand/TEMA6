@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="VECTOR.h" />
+		<Unit filename="date.in" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

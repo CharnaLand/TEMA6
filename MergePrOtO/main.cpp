@@ -114,6 +114,7 @@ VECT_DE_VECT::VECT_DE_VECT(int CAT_PE_CAT, int CE)
 
 VECT_DE_VECT::~VECT_DE_VECT()
 {
+//cout<<"~~\n"<<*this<<"\n~~\n";
     delete[] vedeve;
     vedeve=NULL;
     nr_coloane=nr_linii=0;
@@ -164,47 +165,72 @@ int lin=max(nr_linii,vv.nr_linii), col=max(nr_coloane,vv.nr_coloane);
 sum->nr_linii=lin;
 sum->nr_coloane=col;
 sum->vedeve=new VECTOR[lin];
+lin=min(nr_linii,vv.nr_linii);
 for(int i=0;i<lin;i++)
 {
     sum->vedeve[i].set_elm(col);                            ///CE AM IN COMUN
     int c=min(vedeve[i].get_elm(),vv.vedeve[i].get_elm());
     int C=max(vedeve[i].get_elm(),vv.vedeve[i].get_elm());
     int *p=new int[col];
-    for(int j=0;j<c;j++) p[i]=vedeve[i].get_elm_poz(j)+vv.vedeve[i].get_elm_poz(j);
+    for(int j=0;j<c;j++) p[j]=vedeve[i].get_elm_poz(j)+vv.vedeve[i].get_elm_poz(j);
 
     if(vedeve[i].get_elm()>vv.vedeve[i].get_elm())          ///CE ARE DOAR O COLOANA
-        for(int j=c;j<C;j++) p[i]=vedeve[i].get_elm_poz(j);
+        for(int j=c;j<C;j++) p[j]=vedeve[i].get_elm_poz(j);
     else
-        for(int j=c;j<C;j++) p[i]=vvvedeve[i].get_elm_poz(j);
+        for(int j=c;j<C;j++) p[j]=vedeve[i].get_elm_poz(j);
 
-    for()                                                   ///ZEROURI LA COLOANELE MAI SCURTE
+    for(int j=C;j<col;j++) p[j]=0;                         ///ZEROURI LA COLOANELE MAI SCURTE
+
+    sum->vedeve[i].set_vct(p);
 }
     ///DE AICI BAGI NUMAI 0
+if(nr_linii>vv.nr_linii)
+{
+    for(int i=lin;i<sum->nr_linii;i++)
+    {
+        sum->vedeve[i].set_elm(col);
+        int *p=new int[col];
+        int c=vedeve[i].get_elm();
+        for(int j=0;j<c;j++) p[j]=vedeve[i].get_elm_poz(j);///ELEMENTE NENULE
+        for(int j=c;j<nr_coloane;j++) p[j]=0;               ///ELEMENTE NULE
 
+    sum->vedeve[i].set_vct(p);
+    }
+}
+if(nr_linii<vv.nr_linii)
+{
+    for(int i=lin;i<sum->nr_linii;i++)
+    {
+        sum->vedeve[i].set_elm(col);
+        int *p=new int[col];
+        int c=vedeve[i].get_elm();
+        for(int j=0;j<c;j++) p[j]=vedeve[i].get_elm_poz(j);///ELEMENTE NENULE
+        for(int j=c;j<nr_coloane;j++) p[j]=0;               ///ELEMENTE NULE
+
+    sum->vedeve[i].set_vct(p);
+    }
+}
 return *sum;
+}
+
+VECT_DE_VECT& VECT_DE_VECT::operator= (VECT_DE_VECT& vv)
+{
+    nr_linii=vv.nr_linii;
+    nr_coloane=vv.nr_coloane;
+    vedeve=vv.vedeve;
+return *this;
 }
 
 int main()
 {
-VECT_DE_VECT v1;
+VECT_DE_VECT v1,v2,v3;
 ifstream f ("date.in");
-f>>v1;
-cout<<v1;
-VECT_DE_VECT v2(v1);
-cout<<"\n"<<v2;
+f>>v1>>v2>>v3;
+VECT_DE_VECT v4;
+
+v3=v1+v2+v3;
+v2=v1;
+
 f.close();
-
-int** c;
-c=v2.creeaza_matrice();
-cout<<"\n";
-for(int i=0;i<v2.get_lin();i++)
-{
-    for(int j=0;j<v2.get_col();j++)
-        cout<<c[i][j]<<" ";
-cout<<"\n";
-}
-v1.umple_zero();
-cout<<v1;
-
 return 0;
 }
