@@ -177,7 +177,7 @@ for(int i=0;i<lin;i++)
     if(vedeve[i].get_elm()>vv.vedeve[i].get_elm())          ///CE ARE DOAR O COLOANA
         for(int j=c;j<C;j++) p[j]=vedeve[i].get_elm_poz(j);
     else
-        for(int j=c;j<C;j++) p[j]=vedeve[i].get_elm_poz(j);
+        for(int j=c;j<C;j++) p[j]=vv.vedeve[i].get_elm_poz(j);
 
     for(int j=C;j<col;j++) p[j]=0;                         ///ZEROURI LA COLOANELE MAI SCURTE
 
@@ -203,8 +203,8 @@ if(nr_linii<vv.nr_linii)
     {
         sum->vedeve[i].set_elm(col);
         int *p=new int[col];
-        int c=vedeve[i].get_elm();
-        for(int j=0;j<c;j++) p[j]=vedeve[i].get_elm_poz(j);///ELEMENTE NENULE
+        int c=vv.vedeve[i].get_elm();
+        for(int j=0;j<c;j++) p[j]=vv.vedeve[i].get_elm_poz(j);///ELEMENTE NENULE
         for(int j=c;j<nr_coloane;j++) p[j]=0;               ///ELEMENTE NULE
 
     sum->vedeve[i].set_vct(p);
@@ -232,7 +232,7 @@ f>>v1>>v2>>v3;
 VECT_DE_VECT v4;
 
 v4=v1+v2;
-
+cout<<v4<<"\n---\n";
 f.close();
 return 0;
 }
