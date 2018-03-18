@@ -92,7 +92,7 @@ VECTOR::VECTOR(VECTOR& v)
 
 VECTOR::~VECTOR()
 {
-if(elm!=0) delete[] vct;
+if(vct!=NULL) delete[] vct;
 elm=0;
 vct=NULL;
 }

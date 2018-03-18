@@ -114,8 +114,8 @@ VECT_DE_VECT::VECT_DE_VECT(int CAT_PE_CAT, int CE)
 
 VECT_DE_VECT::~VECT_DE_VECT()
 {
-//cout<<"~~\n"<<*this<<"\n~~\n";
-    delete[] vedeve;
+cout<<"~~\n"<<*this<<"\n~~\n";
+    if(vedeve!=NULL) delete[] vedeve;
     vedeve=NULL;
     nr_coloane=nr_linii=0;
 }
@@ -215,9 +215,12 @@ return *sum;
 
 VECT_DE_VECT& VECT_DE_VECT::operator= (VECT_DE_VECT& vv)
 {
+    delete[] vedeve;
     nr_linii=vv.nr_linii;
     nr_coloane=vv.nr_coloane;
-    vedeve=vv.vedeve;
+    vedeve=new VECTOR[nr_linii];
+    for(int i=0;i<nr_linii;i++)
+        vedeve[i]=vv.vedeve[i];
 return *this;
 }
 
@@ -228,8 +231,7 @@ ifstream f ("date.in");
 f>>v1>>v2>>v3;
 VECT_DE_VECT v4;
 
-v3=v1+v2+v3;
-v2=v1;
+v4=v1+v2;
 
 f.close();
 return 0;
