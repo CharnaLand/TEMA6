@@ -41,15 +41,13 @@ ifstream& operator>> (ifstream& fin, VECT_DE_VECT& vv)
     fin>>vv.nr_linii;
     vv.nr_coloane=0;
     vv.vedeve=new VECTOR[vv.nr_linii];
-    for(int i=0;i<vv.nr_linii;i++)
-    {
-        fin>>x;
-        vv.nr_coloane=max(x,vv.nr_coloane);
-        vv.vedeve[i].set_elm(x);
-    }///SETEAZA TOATE LUNGIMILE LINIILOR DE TIP VECTOR
 
     for(int i=0;i<vv.nr_linii;i++)
     {
+        fin>>x;                     ///CITIRE LUNGIME VECTOR
+        vv.nr_coloane=max(x,vv.nr_coloane);
+        vv.vedeve[i].set_elm(x);
+                                    ///CONSTRUIRE SI SETARE VECTOR
         int n=vv.vedeve[i].get_elm();
         int* p=new int[n];
         for(int j=0;j<n;j++) fin>>p[j];
@@ -65,16 +63,14 @@ istream& operator>> (istream& in,VECT_DE_VECT& vv)
     in>>vv.nr_linii;
     vv.nr_coloane=0;
     vv.vedeve=new VECTOR[vv.nr_linii];
-  cout<<"Introduceti numarul de COLOANE pentru fiecare dintre cele "<<vv.nr_linii<<" LINII ale VECTORULUI DE VECTORI:\n";
-    for(int i=0;i<vv.nr_linii;i++)
-    {
-        in>>x;
-        vv.nr_coloane=max(x,vv.nr_coloane);
-        vv.vedeve[i].set_elm(x);
-    }///SETEAZA TOATE LUNGIMILE LINIILOR DE TIP VECTOR
 
     for(int i=0;i<vv.nr_linii;i++)
     {
+        cout<<"Introduceti numarul de ELEMENTE pentru VECTORUL de pe lini "<<i+1<<" : \n";
+        in>>x;
+        vv.nr_coloane=max(x,vv.nr_coloane);
+        vv.vedeve[i].set_elm(x);
+
         int n=vv.vedeve[i].get_elm();
         int* p=new int[n];
    cout<<"Introduceti cele "<<n<<" elemente din LINIA "<<i+1<<" a VECTORULUI DE VECTORI:\n ";
@@ -266,9 +262,9 @@ int main()
 {
 VECT_DE_VECT v1,v2,v3;
 ifstream f ("date.in");
-cin>>v1;
-cout<<"\033c";
+f>>v1;
 cin>>v2;
+cout<<v1<<"\n"<<v2<<"\n%\n";
 
 f.close();
 return 0;
