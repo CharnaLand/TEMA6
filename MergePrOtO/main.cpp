@@ -104,6 +104,7 @@ nr_linii=0;
 vedeve=NULL;
 }
 
+/**
 VECT_DE_VECT::VECT_DE_VECT(VECT_DE_VECT& vv)
 {
     nr_coloane=vv.nr_coloane;
@@ -120,10 +121,23 @@ VECT_DE_VECT::VECT_DE_VECT(VECT_DE_VECT& vv)
         vedeve[i].set_vct(p);
     }
 }
+*/
 
+VECT_DE_VECT::VECT_DE_VECT(VECT_DE_VECT& vv)
+{
+    nr_coloane=vv.nr_coloane;
+    nr_linii=vv.nr_linii;
+
+    vedeve=new VECTOR[nr_linii];
+    for(int i=0;i<nr_linii;i++)
+    {///COPIERE PRIN SUPRAINCARCARE OPERATORULUI DE ATRIBUIRE AL CLASEI VECTOR
+        vedeve[i]=vv.vedeve[i];
+    }
+}
 
 VECT_DE_VECT::~VECT_DE_VECT()
 {
+cout<<"~~\n"<<*this<<"\n~~\n";
     if(vedeve!=NULL) delete[] vedeve;
     vedeve=NULL;
     nr_coloane=nr_linii=0;
@@ -233,14 +247,29 @@ VECT_DE_VECT& VECT_DE_VECT::operator= (VECT_DE_VECT& vv)
 return *this;
 }
 
+void VECT_DE_VECT::afis_drept_matrice()
+{
+    for(int i=0;i<nr_linii;i++)
+    {
+        int k=vedeve[i].get_elm();
+
+        for(int j=0;j<k;j++)
+            cout<<vedeve[i].get_elm_poz(j)<<" ";
+        for(int j=k;j<nr_coloane;j++) cout<<"0 ";
+
+        cout<<"\n";
+
+    }
+}
+
 int main()
 {
 VECT_DE_VECT v1,v2,v3;
 ifstream f ("date.in");
-f>>v1>>v2>>v3;
-VECT_DE_VECT v4;
-cin>>v4;
-cout<<"\n"<<v4;
+cin>>v1;
+cout<<"\033c";
+cin>>v2;
+
 f.close();
 return 0;
 }

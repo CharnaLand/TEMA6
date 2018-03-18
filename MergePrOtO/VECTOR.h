@@ -10,7 +10,6 @@ class VECTOR
 public:
     VECTOR& operator+ (VECTOR&);
     VECTOR& operator= (VECTOR&);
-    //VECTOR*& operator= (VECTOR*&);
     ///GET
     int get_elm_poz(int);
     int get_elm(){return elm;}
@@ -57,13 +56,38 @@ istream& operator>> (istream& in,VECTOR& ve)
     return in;
 }
 
-
 ostream& operator<< (ostream& out,VECTOR& ve)
 {
     for(int i=0;i<ve.get_elm();i++)
         out<<ve.get_elm_poz(i)<<" ";
     out<<"\n";
     return out;
+}
+
+VECTOR& VECTOR::operator+ (VECTOR& v)
+{
+    VECTOR *sum;
+    sum=new VECTOR;
+    sum->elm=max(elm,v.elm);
+    sum->vct=new int[sum->elm];
+    int n=min(elm,v.elm),M=max(elm,v.elm);
+    for(int i=0;i<n;i++)
+        sum->vct[i]=vct[i]+v.vct[i];
+    if(v.elm>elm)
+        for(int i=n;i<M;i++) sum->vct[i]=v.vct[i];
+    if(v.elm<elm)
+        for(int i=n;i<M;i++) sum->vct[i]=vct[i];
+
+    return *sum;
+}
+
+VECTOR& VECTOR::operator= (VECTOR& v)
+{
+    elm=v.elm;
+    vct=new int[elm];
+    for(int i=0;i<elm;i++)
+        vct[i]=v.vct[i];
+return *this;
 }
 
 VECTOR::VECTOR()
@@ -95,32 +119,6 @@ VECTOR::~VECTOR()
 if(vct!=NULL) delete[] vct;
 elm=0;
 vct=NULL;
-}
-
-VECTOR& VECTOR:: operator= (VECTOR& v)
-{
-    elm=v.elm;
-    vct=new int[elm];
-    for(int i=0;i<elm;i++)
-        vct[i]=v.vct[i];
-return *this;
-}
-
-VECTOR& VECTOR::operator+ (VECTOR& v)
-{
-    VECTOR *sum;
-    sum=new VECTOR;
-    sum->elm=max(elm,v.elm);
-    sum->vct=new int[sum->elm];
-    int n=min(elm,v.elm),M=max(elm,v.elm);
-    for(int i=0;i<n;i++)
-        sum->vct[i]=vct[i]+v.vct[i];
-    if(v.elm>elm)
-        for(int i=n;i<M;i++) sum->vct[i]=v.vct[i];
-    if(v.elm<elm)
-        for(int i=n;i<M;i++) sum->vct[i]=vct[i];
-
-    return *sum;
 }
 
 void VECTOR::afis_vect()
