@@ -65,7 +65,7 @@ istream& operator>> (istream& in,VECT_DE_VECT& vv)
     in>>vv.nr_linii;
     vv.nr_coloane=0;
     vv.vedeve=new VECTOR[vv.nr_linii];
-  cout<<"Introduceti numarul de COLOANE pentru fiecare dintre cele "<<vv.nr_linii<<" LINII ale VECTORULUI DE VECTORI\n: ";
+  cout<<"Introduceti numarul de COLOANE pentru fiecare dintre cele "<<vv.nr_linii<<" LINII ale VECTORULUI DE VECTORI:\n";
     for(int i=0;i<vv.nr_linii;i++)
     {
         in>>x;
@@ -77,7 +77,7 @@ istream& operator>> (istream& in,VECT_DE_VECT& vv)
     {
         int n=vv.vedeve[i].get_elm();
         int* p=new int[n];
-   cout<<"Introduceti cele "<<n<<" elemente din LINIA "<<i+1<<" a VECTORULUI DE VECTORI\n: ";
+   cout<<"Introduceti cele "<<n<<" elemente din LINIA "<<i+1<<" a VECTORULUI DE VECTORI:\n ";
         for(int j=0;j<n;j++) in>>p[j];
         vv.vedeve[i].set_vct(p);
     }
@@ -239,7 +239,8 @@ VECT_DE_VECT v1,v2,v3;
 ifstream f ("date.in");
 f>>v1>>v2>>v3;
 VECT_DE_VECT v4;
-
+cin>>v4;
+cout<<"\n"<<v4;
 f.close();
 return 0;
 }
