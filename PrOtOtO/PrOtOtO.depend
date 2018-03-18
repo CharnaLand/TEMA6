@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1521293340 source:d:\facooltate\programare\poo\prototo\main.cpp
+	<iostream>
+	<fstream>
+
