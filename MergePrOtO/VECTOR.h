@@ -48,9 +48,11 @@ ifstream& operator>> (ifstream& in,VECTOR& ve)
 
 istream& operator>> (istream& in,VECTOR& ve)
 {
+cout<<"INDTRODUCETI NUMARUL DE ELEMENTE ALE VECTORULUI : ";
     in>>ve.elm;
     delete[] ve.vct;
     ve.vct=new int[ve.elm];
+cout<<"INTRODUCETI CELE "<<ve.elm<<" ELEMENTE : ";
     for(int i=0;i<ve.elm;i++)
         in>>ve.vct[i];
     return in;
