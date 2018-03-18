@@ -233,6 +233,7 @@ VECT_DE_VECT v4;
 
 v4=v1+v2;
 cout<<v4<<"\n---\n";
+cout<<v4+v3<<"\n---\n%\n";
 f.close();
 return 0;
 }
