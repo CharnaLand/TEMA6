@@ -58,6 +58,32 @@ ifstream& operator>> (ifstream& fin, VECT_DE_VECT& vv)
 return fin;
 }
 
+istream& operator>> (istream& in,VECT_DE_VECT& vv)
+{
+  int x;
+  cout<<"Introduceti numarul de LINII ale VECTORULUI DE VECTORI: ";
+    in>>vv.nr_linii;
+    vv.nr_coloane=0;
+    vv.vedeve=new VECTOR[vv.nr_linii];
+  cout<<"Introduceti numarul de COLOANE pentru fiecare dintre cele "<<vv.nr_linii<<" LINII ale VECTORULUI DE VECTORI:\n";
+    for(int i=0;i<vv.nr_linii;i++)
+    {
+        in>>x;
+        vv.nr_coloane=max(x,vv.nr_coloane);
+        vv.vedeve[i].set_elm(x);
+    }///SETEAZA TOATE LUNGIMILE LINIILOR DE TIP VECTOR
+
+    for(int i=0;i<vv.nr_linii;i++)
+    {
+        int n=vv.vedeve[i].get_elm();
+        int* p=new int[n];
+   cout<<"Introduceti cele "<<n<<" elemente din LINIA "<<i+1<<" a VECTORULUI DE VECTORI:\n ";
+        for(int j=0;j<n;j++) in>>p[j];
+        vv.vedeve[i].set_vct(p);
+    }
+return in;
+}
+
 ostream& operator<< (ostream& out,VECT_DE_VECT& vv)///FARA 0 LA SFARSIT
 {
     for(int i=0;i<vv.nr_linii;i++)
@@ -95,26 +121,9 @@ VECT_DE_VECT::VECT_DE_VECT(VECT_DE_VECT& vv)
     }
 }
 
-/**
-VECT_DE_VECT::VECT_DE_VECT(int CAT_PE_CAT, int CE)
-{
-    nr_coloane=nr_linii=CAT_PE_CAT;
-    vedeve=new VECTOR[CAT_PE_CAT];
-    for(int i=0;i<CAT_PE_CAT;i++)
-    {
-        vedeve[i].set_elm(CAT_PE_CAT);
-        int* p=new int[CAT_PE_CAT];
-        for(int j=0;j<CAT_PE_CAT;j++)
-            p[i]=CE;
-        vedeve[i].set_vct(p);
-    }
-}
-*/
-
 
 VECT_DE_VECT::~VECT_DE_VECT()
 {
-cout<<"~~\n"<<*this<<"\n~~\n";
     if(vedeve!=NULL) delete[] vedeve;
     vedeve=NULL;
     nr_coloane=nr_linii=0;
@@ -230,9 +239,8 @@ VECT_DE_VECT v1,v2,v3;
 ifstream f ("date.in");
 f>>v1>>v2>>v3;
 VECT_DE_VECT v4;
-
-v4=v1+v2;
-cout<<v4<<"\n---\n";
+cin>>v4;
+cout<<"\n"<<v4;
 f.close();
 return 0;
 }
